@@ -7,10 +7,12 @@
 
   // price: null = "preço a combinar"
   var PRODUTOS = {
-    'pao-de-mel':     { nome: 'Pão de mel', price: 8 },
-    'cone':           { nome: 'Cone trufado', price: 8 },
-    'bolo-pote':      { nome: 'Bolo de pote', price: 12.5 },
-    'torta-pedaco':   { nome: 'Torta salgada (pedaço)', price: 6.5 },
+    // Doces da semana sem preço no site: valor combinado pelo WhatsApp (muda com a quantidade).
+    // Tabela de referência: pão de mel 8 · cone 8 · bolo de pote 12,50 · torta 6,50 o pedaço
+    'pao-de-mel':     { nome: 'Pão de mel', price: null },
+    'cone':           { nome: 'Cone trufado', price: null },
+    'bolo-pote':      { nome: 'Bolo de pote', price: null },
+    'torta-pedaco':   { nome: 'Torta salgada (pedaço)', price: null },
     'bolo-inteiro':   { nome: 'Bolo inteiro', price: null },
     'pudim-p':        { nome: 'Pudim P (aro 15 cm)', price: 35 },
     'pudim-g':        { nome: 'Pudim G (aro 20 cm)', price: 70 },
@@ -62,8 +64,8 @@
     $('cart-open').hidden = s.count === 0;
     $('cart-count').textContent = s.count;
     $('cart-bar-total').textContent = s.ask && s.total === 0 ? 'a combinar' : brl(s.total);
-    $('cart-total').textContent = brl(s.total);
-    $('cart-ask').hidden = !s.ask;
+    $('cart-total').textContent = s.ask && s.total === 0 ? 'a combinar' : brl(s.total);
+    $('cart-ask').hidden = !(s.ask && s.total > 0);
     $('cart-empty').hidden = s.count > 0;
     $('cart-sum').hidden = s.count === 0;
     $('cart-form').hidden = s.count === 0;
@@ -148,7 +150,8 @@
       l += ' — ' + (c.price == null ? 'preço a combinar' : brl(c.price * c.qty));
       linhas.push(l);
     });
-    linhas.push('', '*Total:* ' + brl(s.total) + (s.ask ? ' + itens a combinar' : ''), '');
+    var totalTxt = s.ask && s.total === 0 ? 'a combinar' : brl(s.total) + (s.ask ? ' + itens a combinar' : '');
+    linhas.push('', '*Total:* ' + totalTxt, '');
     linhas.push('*Nome:* ' + f.nome.value.trim());
     linhas.push('*Receber:* ' + f.receber.value);
     if (f.data.value) { var d = f.data.value.split('-'); linhas.push('*Para:* ' + d[2] + '/' + d[1] + '/' + d[0]); }
