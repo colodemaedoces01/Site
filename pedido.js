@@ -36,6 +36,11 @@
   };
   var TAMANHOS = ['100 g', '250 g', '500 g'];
 
+  // Recheados já vêm com cobertura. Tradicionais vêm sem; cobertura opcional custa COB_EXTRA.
+  var COBERTURAS = ['Chocolate ao leite', 'Chocolate meio amargo', 'Chocolate branco com coco', 'Pistache'];
+  var SEM_COB = 'Sem cobertura', MESMO_SABOR = 'Mesmo sabor do recheio';
+  var COB_EXTRA = 2;
+
   var KEY = 'colodemae-pedido';
   var cart = [];
   try { cart = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { cart = []; }
@@ -105,16 +110,33 @@
 
   // Monte seu panetone
   var bf = $('builder');
+  var cobRecheado = null;
+  // Monta as opções de cobertura conforme o tipo (recheado ou tradicional)
+  function fillCobertura(recheado) {
+    var sel = bf.cobertura, prev = sel.value;
+    var opts = recheado ? COBERTURAS.concat(MESMO_SABOR) : [SEM_COB].concat(COBERTURAS);
+    sel.textContent = '';
+    opts.forEach(function (o) {
+      var op = document.createElement('option');
+      op.value = o;
+      op.textContent = o;
+      sel.appendChild(op);
+    });
+    // Nos tradicionais o adicional aparece no rótulo (no campo o texto ficaria cortado)
+    $('cob-label').textContent = recheado ? 'Cobertura' : 'Cobertura (+ ' + brl(COB_EXTRA) + ')';
+    // Ao trocar para tradicional, volta para "Sem cobertura"
+    sel.value = recheado && opts.indexOf(prev) >= 0 ? prev : opts[0];
+  }
   function builderState() {
     var tipo = bf.tipo.value, tam = +bf.tamanho.value, recheado = /recheado/.test(tipo);
     bf.querySelector('.only-filled').hidden = !recheado;
-    var cobOpt = bf.cobertura.querySelector('option:last-child');
-    cobOpt.disabled = !recheado;
-    if (!recheado && bf.cobertura.selectedIndex === bf.cobertura.options.length - 1) bf.cobertura.selectedIndex = 0;
+    if (recheado !== cobRecheado) { fillCobertura(recheado); cobRecheado = recheado; }
+    var cob = bf.cobertura.value;
+    var extra = !recheado && cob !== SEM_COB ? COB_EXTRA : 0;
     var qtd = Math.max(1, Math.min(50, parseInt(bf.qtd.value, 10) || 1));
-    var price = PANETONES[tipo][tam];
+    var price = PANETONES[tipo][tam] + extra;
     $('builder-price').textContent = brl(price * qtd) + (qtd > 1 ? ' (' + qtd + ' × ' + brl(price) + ')' : '');
-    return { tipo: tipo, tam: tam, recheado: recheado, qtd: qtd, price: price };
+    return { tipo: tipo, tam: tam, recheado: recheado, qtd: qtd, price: price, cob: cob };
   }
   bf.addEventListener('change', builderState);
   bf.addEventListener('input', builderState);
@@ -123,7 +145,8 @@
     var s = builderState();
     var det = [];
     if (s.recheado) det.push('recheio ' + bf.recheio.value);
-    det.push('cobertura ' + (bf.cobertura.value === 'Mesmo sabor do recheio' ? 'de ' + bf.recheio.value : bf.cobertura.value));
+    if (s.cob === SEM_COB) det.push('sem cobertura');
+    else det.push('cobertura ' + (s.cob === MESMO_SABOR ? 'de ' + bf.recheio.value : s.cob) + (s.recheado ? '' : ' (+ ' + brl(COB_EXTRA) + ')'));
     var nome = s.tipo + ' ' + TAMANHOS[s.tam];
     add({ key: [nome].concat(det).join('|'), nome: nome, detalhe: det.join(' · '), price: s.price, qty: s.qtd });
     bf.qtd.value = 1; builderState();

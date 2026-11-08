@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -82,7 +82,7 @@
             <tr class="hl"><th scope="row">Chocotone recheado</th><td>15,00</td><td>25,00</td><td>40,00</td></tr>
           </tbody>
         </table>
-        <p class="note">Valores em reais (R$).</p>
+        <p class="note">Valores em reais (R$). Os recheados já vêm com cobertura. Panetone e chocotone tradicionais vêm sem cobertura; se quiser, é + R$ 2,00.</p>
       </div>
 
       <h3 class="h3">Recheios</h3>
@@ -91,7 +91,7 @@
       </ul>
 
       <h3 class="h3">Coberturas</h3>
-      <p class="muted">Todas decoradas com confeitos de Natal. A cobertura também pode ser de qualquer sabor da lista de recheios.</p>
+      <p class="muted">Inclusas nos recheados, todas decoradas com confeitos de Natal. A cobertura também pode ser de qualquer sabor da lista de recheios. Nos tradicionais (sem recheio), a cobertura é opcional: + R$ 2,00.</p>
       <div class="grid4">
         <figure class="ph"><img src="cob-meio-amargo.jpg" alt="Panetone com cobertura de chocolate meio amargo e confeitos de Natal" loading="lazy"><figcaption>Chocolate meio amargo</figcaption></figure>
         <figure class="ph"><img src="cob-ao-leite.jpg" alt="Panetone com cobertura de chocolate ao leite e granulado" loading="lazy"><figcaption>Chocolate ao leite</figcaption></figure>
@@ -117,7 +117,7 @@
               <option>Brigadeiro</option><option>Brigadeiro de café</option><option>Maracujá</option><option>Paçoca</option><option>Prestígio</option><option>Leite Ninho com Nutella</option><option>Doce de leite</option>
             </select>
           </label>
-          <label>Cobertura
+          <label><span id="cob-label">Cobertura</span>
             <select name="cobertura">
               <option>Chocolate ao leite</option><option>Chocolate meio amargo</option><option>Chocolate branco com coco</option><option>Pistache</option><option>Mesmo sabor do recheio</option>
             </select>
@@ -187,8 +187,22 @@
         <h2 class="script">Docinhos da semana</h2>
         <p class="sec-sub">Os sabores mudam conforme a fornada. Pergunta no WhatsApp o que tem essa semana! Pedido em quantidade tem preço especial.</p>
       </div>
+      <article class="feature">
+        <div class="feature-photos">
+          <img class="f-main" src="pao-de-mel.jpg" alt="Pão de mel mordido, com recheio de doce de leite escorrendo e casquinha de chocolate" width="900" height="1200" loading="lazy">
+          <img src="pao-de-mel-2.jpg" alt="Pão de mel aberto mostrando as camadas de massa e recheio" width="520" height="693" loading="lazy">
+          <img src="pao-de-mel-3.jpg" alt="Pão de mel de perto, com muito recheio" width="520" height="693" loading="lazy">
+        </div>
+        <div class="feature-txt">
+          <p class="kicker">★ O campeão de vendas</p>
+          <h3 class="script">Pão de mel</h3>
+          <p>Massa fofinha, casquinha de chocolate e recheio até a borda. É o que mais sai aqui em casa e some rapidinho!</p>
+          <ul class="chips chips-dark"><li>Doce de leite</li><li>Prestígio</li></ul>
+          <p class="feature-note">O recheio muda conforme a fornada. Pergunta qual tem essa semana! Vai pedir para festa, lembrancinha ou para a firma? Em quantidade tem preço especial.</p>
+          <div class="card-foot"><span class="price price-ask">Sob consulta</span><button class="add" type="button" data-add="pao-de-mel">+ Pedido</button></div>
+        </div>
+      </article>
       <div class="cards">
-        <article class="card"><h3>Pão de mel</h3><p>O campeão de vendas da casa. Some rapidinho!</p><div class="card-foot"><span class="price price-ask">Sob consulta</span><button class="add" type="button" data-add="pao-de-mel">+ Pedido</button></div></article>
         <article class="card"><h3>Cone trufado</h3><p>Maracujá (da fruta, não é essência!), prestígio, brigadeiro e outros sabores.</p><div class="card-foot"><span class="price price-ask">Sob consulta</span><button class="add" type="button" data-add="cone">+ Pedido</button></div></article>
         <article class="card"><h3>Bolo de pote</h3><p>Camadas de massa fofinha e muito recheio.</p><div class="card-foot"><span class="price price-ask">Sob consulta</span><button class="add" type="button" data-add="bolo-pote">+ Pedido</button></div></article>
         <article class="card"><h3>Torta salgada</h3><p>Massa caseira e recheio caprichado. Frango e outros sabores.</p><div class="card-foot"><span class="price price-ask">Sob consulta</span><button class="add" type="button" data-add="torta-pedaco">+ Pedido</button></div></article>
@@ -276,6 +290,6 @@
   </div>
 </dialog>
 
-<script src="pedido.js"></script>
+<script src="pedido.js?v=4"></script>
 </body>
 </html>
