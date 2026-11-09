@@ -34,8 +34,10 @@ a{color:inherit}
 .topbar{position:sticky;top:0;z-index:20;background:rgba(36,16,42,.94);backdrop-filter:blur(8px);color:#fff}
 .topbar-in{display:flex;align-items:center;gap:20px;min-height:64px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
-.brand img{width:40px;height:auto}
-.brand span{font-family:'Kaushan Script',cursive;font-size:1.5rem}
+.brand img{width:54px;height:auto;margin:5px 0}
+.brand span{font-family:'Kaushan Script',cursive;font-size:1.6rem}
+.footer-in img{width:120px;height:auto}
+@media (max-width:760px){ .brand img{width:46px} .brand span{font-size:1.5rem} }
 .nav{display:flex;gap:22px}
 .nav a{text-decoration:none;font-weight:600;opacity:.88}
 .nav a:hover{opacity:1;color:var(--gold)}
@@ -143,6 +145,46 @@ a{color:inherit}
 @media (max-width:760px){
   .feature{grid-template-columns:1fr;gap:22px;padding:14px 14px 22px}
   .feature-txt{padding:0 6px}
+}
+
+/* Festas: docinhos e bolos */
+.sec-rose{background:#fcedf1}
+.party-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.party-grid img,.cakes-photos img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px;box-shadow:var(--shadow)}
+.party-info{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end;margin-top:8px}
+.party-info .muted{margin:16px 0 0}
+.party-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.price-ask-light{background:transparent;border:1.5px solid var(--red);color:var(--red)}
+.add.add-red{background:var(--red);color:#fff;padding:10px 20px}
+.add.add-red:hover{background:var(--red-2)}
+.treats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.treat{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.treat img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.treat-txt{padding:16px 18px 20px;display:flex;flex-direction:column;flex:1}
+.treat-tag{margin:0 0 4px;font-size:.78rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red)}
+.treat h3{margin:0 0 6px;font-size:1.2rem;color:var(--plum)}
+.treat-txt>p:not(.treat-tag){margin:0 0 16px;color:var(--muted);flex:1}
+.treat .party-cta{gap:10px}
+.cakes{display:grid;gap:30px}
+.cakes-txt{display:grid;grid-template-columns:1.2fr 1.2fr 1fr;gap:36px;align-items:start}
+.cakes-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cakes-txt .h3{margin:0 0 6px}
+.cakes-txt p{margin:0 0 22px;color:var(--ink)}
+.cakes-txt .party-cta{margin-top:6px}
+@media (max-width:860px){
+  .party-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .party-info{grid-template-columns:1fr;align-items:start}
+  .cakes{gap:24px}
+  .cakes-txt{grid-template-columns:1fr;gap:0}
+  .cakes-photos{gap:10px}
+  .treats{grid-template-columns:repeat(2,1fr);gap:12px}
+}
+@media (max-width:560px){
+  .treat-txt{padding:12px 12px 14px}
+  .treat h3{font-size:1.05rem}
+  .treat-txt>p:not(.treat-tag){font-size:.92rem}
+  .treat .party-cta{flex-direction:column;align-items:stretch;gap:8px}
+  .treat .party-cta .price{text-align:center;align-self:stretch}
 }
 
 /* Como encomendar */
